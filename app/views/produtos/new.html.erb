@@ -1,2 +1,11 @@
-<h1>Produtos#new</h1>
-<p>Find me in app/views/produtos/new.html.erb</p>
+<% content_for :title, "New produto" %>
+
+<h1>New produto</h1>
+
+<%= render "form", produto: @produto %>
+
+<br>
+
+<div>
+  <%= link_to "Back to produtos", produtos_path %>
+</div>

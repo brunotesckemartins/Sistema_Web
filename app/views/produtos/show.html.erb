@@ -1,2 +1,10 @@
-<h1>Produtos#show</h1>
-<p>Find me in app/views/produtos/show.html.erb</p>
+<p style="color: green"><%= notice %></p>
+
+<%= render @produto %>
+
+<div>
+  <%= link_to "Edit this produto", edit_produto_path(@produto) %> |
+  <%= link_to "Back to produtos", produtos_path %>
+
+  <%= button_to "Destroy this produto", @produto, method: :delete %>
+</div>
