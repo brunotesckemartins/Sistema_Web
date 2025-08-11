@@ -1,2 +1,16 @@
-<h1>Produtos#index</h1>
-<p>Find me in app/views/produtos/index.html.erb</p>
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Produtos" %>
+
+<h1>Produtos</h1>
+
+<div id="produtos">
+  <% @produtos.each do |produto| %>
+    <%= render produto %>
+    <p>
+      <%= link_to "Show this produto", produto %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New produto", new_produto_path %>

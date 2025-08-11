@@ -1,2 +1,12 @@
-<h1>Produtos#edit</h1>
-<p>Find me in app/views/produtos/edit.html.erb</p>
+<% content_for :title, "Editing produto" %>
+
+<h1>Editing produto</h1>
+
+<%= render "form", produto: @produto %>
+
+<br>
+
+<div>
+  <%= link_to "Show this produto", @produto %> |
+  <%= link_to "Back to produtos", produtos_path %>
+</div>

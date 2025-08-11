@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  resources :produtos
   namespace :api do
     namespace :v1 do
       # Rotas RESTful padrão para Produtos
-      resources :produtos, except: [:new, :edit]  # Remove rotas de views HTML
+      resources :produtos, except: [ :new, :edit ]  # Remove rotas de views HTML
     end
   end
 
