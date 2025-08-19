@@ -1,16 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<% @produtos.each do |produto| %>
+  <div id="<%= dom_id produto %>">
+    <p>
+      <strong>Nome:</strong>
+      <%= produto.nome %>
+    </p>
 
-<% content_for :title, "Produtos" %>
+    <% if produto.imagem.attached? %>
+      <%= image_tag produto.imagem, style: "width: 200px; height: auto;" %>
+    <% end %>
 
-<h1>Produtos</h1>
-
-<div id="produtos">
-  <% @produtos.each do |produto| %>
-    <%= render produto %>
     <p>
       <%= link_to "Show this produto", produto %>
     </p>
-  <% end %>
-</div>
-
-<%= link_to "New produto", new_produto_path %>
+  </div>
+<% end %>
