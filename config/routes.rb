@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :usuarios
+
+  root "produtos#index"
   resources :usuarios
   resources :produtos
   namespace :api do
