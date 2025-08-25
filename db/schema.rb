@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_174707) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_182413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -56,6 +56,29 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_174707) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "enderecos", force: :cascade do |t|
+    t.string "rua"
+    t.string "numero"
+    t.string "complemento"
+    t.string "bairro"
+    t.string "cidade"
+    t.string "estado"
+    t.string "cep"
+    t.bigint "usuario_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["usuario_id"], name: "index_enderecos_on_usuario_id"
+  end
+
+  create_table "eventos", force: :cascade do |t|
+    t.string "nome"
+    t.text "descricao"
+    t.datetime "data_evento"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "produtos", force: :cascade do |t|
     t.string "nome"
     t.decimal "preco"
@@ -83,5 +106,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_174707) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "enderecos", "usuarios"
   add_foreign_key "produtos", "categorias"
 end
