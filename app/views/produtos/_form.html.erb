@@ -11,6 +11,12 @@
     </div>
   <% end %>
 
+
+  <div>
+    <%= form.label :categoria_id, "Categoria" %>
+    <%= form.collection_select :categoria_id, Categoria.all, :id, :nome, prompt: 'Selecione uma categoria' %>
+  </div>
+
   <div>
     <%= form.label :imagem, style: "display: block" %>
     <%= form.file_field :imagem %>
