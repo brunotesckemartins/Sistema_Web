@@ -1,4 +1,11 @@
+<h1>Produtos</h1>
+
+<%= link_to 'Criar Novo Produto', new_produto_path %>
+
 <% @produtos.each do |produto| %>
+
+  <%= button_to "Adicionar ao Carrinho", add_to_cart_path(produto), method: :post %>
+
   <div id="<%= dom_id produto %>">
     <p>
       <strong>Nome:</strong>

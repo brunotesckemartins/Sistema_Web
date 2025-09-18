@@ -1,0 +1,41 @@
+<h1>Meu Carrinho de Compras</h1>
+
+<% if @cart_produtos.empty? %>
+  <p>Seu carrinho está vazio.</p>
+<% else %>
+  <table>
+    <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Preço</th>
+      <th>Quantidade</th>
+      <th>Subtotal</th>
+      <th>Ação</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% total_do_carrinho = 0 %>
+    <% @cart_produtos.each do |produto| %>
+      <% quantidade = session['cart'][produto.id.to_s] %>
+      <% subtotal = produto.preco * quantidade %>
+      <% total_do_carrinho += subtotal %>
+      <tr>
+        <td><%= produto.nome %></td>
+        <td><%= number_to_currency(produto.preco) %></td>
+        <td><%= quantidade %></td>
+        <td><%= number_to_currency(subtotal) %></td>
+        <td><%= button_to "Remover", remove_from_cart_path(produto), method: :delete %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <h3>Total: <%= number_to_currency(total_do_carrinho) %></h3>
+
+  <br>
+  <%# No futuro, este botão iniciará o processo de criação do Pedido %>
+  <%= button_to "Finalizar Compra", '#', method: :get %>
+<% end %>
+
+<br>
+<%= link_to "Continuar Comprando", produtos_path %>
