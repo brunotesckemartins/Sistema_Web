@@ -6,11 +6,11 @@ Rails.application.routes.draw do
   resources :usuarios
   resources :produtos
 
-  post 'add_to_cart/produto_id', to: 'cart#add_to_cart', as: 'add_to_cart'
+  post 'add_to_carrinho/produto_id', to: 'carrinho#add_to_carrinho', as: 'add_to_carrinho'
 
-  delete 'remove_from_cart/produto_id', to: 'cart#remove_from_cart', as: 'remove_from_cart'
+  delete 'remove_from_carrinho/produto_id', to: 'carrinho#remove_from_cart', as: 'remove_from_carrinho'
 
-  get 'cart', to: 'cart#show', as: 'cart'
+  get 'carrinho', to: 'carrinho#show', as: 'carrinho'
 
   namespace :api do
     namespace :v1 do
