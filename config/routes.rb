@@ -5,13 +5,18 @@ Rails.application.routes.draw do
   root "produtos#index"
   resources :usuarios
   resources :produtos
+
+  post "add_to_carrinho/produto_id", to: "carrinho#add_to_carrinho", as: "add_to_carrinho"
+
+  delete "remove_from_carrinho/produto_id", to: "carrinho#remove_from_cart", as: "remove_from_carrinho"
+
+  get "carrinho", to: "carrinho#show", as: "carrinho"
+
   namespace :api do
     namespace :v1 do
-      # Rotas RESTful padrão para Produtos
-      resources :produtos, except: [ :new, :edit ]  # Remove rotas de views HTML
+      resources :produtos, except: [ :new, :edit ]
     end
   end
 
-  # Health check (opcional)
   get "up" => "rails/health#show", as: :rails_health_check
 end
