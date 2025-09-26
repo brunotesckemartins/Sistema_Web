@@ -1,5 +1,4 @@
 class CarrinhoController < ApplicationController
-
   def add_to_carrinho
     session[:carrinho] ||= {}
 
