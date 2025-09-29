@@ -2,7 +2,7 @@ class CarrinhoController < ApplicationController
   def add_to_carrinho
     session[:carrinho] ||= {}
 
-    produto_id = params[:produto_id].to_s
+    produto_id = params[:produto_id]
 
     session[:carrinho][produto_id] = (session[:carrinho][produto_id].to_i + 1)
 
@@ -10,16 +10,18 @@ class CarrinhoController < ApplicationController
   end
 
   def show
-    ids_produtos = (session[:carrinho] || {}).keys.map(&:to_i)
+    carrinho_hash = session[:carrinho] || {}
 
-    @produtos_do_carrinho = Produto.where(id: ids_produtos)
-  rescue ActiveRecord::RecordNotFound
-    @produtos_do_carrinho = []
+    ids_dos_produtos = carrinho_hash.keys.map(&:to_i)
+
+    @produtos_no_carrinho = Produto.where(id: ids_dos_produtos).to_a
   end
 
-  def remover_do_carrinho
-    produto_id = params[:produto_id].to_s
-    session[:carrinho]&.delete(produto_id)
+  def remove_from_cart
+    produto_id = params[:produto_id]
+
+    session[:carrinho].delete(produto_id)
+
     redirect_to carrinho_path, notice: "Produto removido do carrinho."
   end
 end

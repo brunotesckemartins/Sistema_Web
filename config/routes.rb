@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   resources :usuarios
   resources :produtos
 
-  post "add_to_carrinho/produto_id", to: "carrinho#add_to_carrinho", as: "add_to_carrinho"
+  post "add_to_carrinho/:produto_id", to: "carrinho#add_to_carrinho", as: "add_to_carrinho"
 
-  delete "remove_from_carrinho/produto_id", to: "carrinho#remove_from_cart", as: "remove_from_carrinho"
+  delete "remove_from_carrinho/:produto_id", to: "carrinho#remove_from_cart", as: "remove_from_carrinho"
 
   get "carrinho", to: "carrinho#show", as: "carrinho"
 
