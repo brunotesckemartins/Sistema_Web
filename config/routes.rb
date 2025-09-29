@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :eventos
   devise_for :usuarios
 
-  root "produtos#index"
+  root "pages#home"
   resources :usuarios
   resources :produtos
 

@@ -12,6 +12,12 @@
       <%= produto.nome %>
     </p>
 
+    <div id="<%= dom_id produto %>">
+      <p>
+        <strong>Preço:</strong>
+        <%= produto.preco %>
+      </p>
+
     <% if produto.imagem.attached? %>
       <%= image_tag produto.imagem, style: "width: 200px; height: auto;" %>
     <% end %>
