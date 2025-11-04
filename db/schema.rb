@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_182413) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_04_182115) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -87,7 +87,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_182413) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "categoria_id", null: false
+    t.text "descricao"
     t.index ["categoria_id"], name: "index_produtos_on_categoria_id"
+  end
+
+  create_table "promocaos", force: :cascade do |t|
+    t.string "nome_promocao"
+    t.decimal "preco_promocional"
+    t.bigint "produto_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["produto_id"], name: "index_promocaos_on_produto_id"
   end
 
   create_table "usuarios", force: :cascade do |t|
@@ -100,6 +110,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_182413) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
@@ -108,4 +119,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_182413) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "enderecos", "usuarios"
   add_foreign_key "produtos", "categorias"
+  add_foreign_key "promocaos", "produtos"
 end

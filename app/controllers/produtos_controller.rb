@@ -1,25 +1,30 @@
 class ProdutosController < ApplicationController
   before_action :set_produto, only: %i[ show edit update destroy ]
+  before_action :require_admin, only: [ :new, :create, :edit, :update, :destroy ]
 
-  # GET /produtos or /produtos.json
   def index
     @produtos = Produto.all
   end
 
-  # GET /produtos/1 or /produtos/1.json
   def show
+    @react_props = {
+      produto: {
+        id: @produto.id,
+        nome: @produto.nome,
+        descricao: @produto.descricao,
+        preco: @produto.preco,
+        categoria: @produto.categoria&.nome
+      }
+    }
   end
 
-  # GET /produtos/new
   def new
     @produto = Produto.new
   end
 
-  # GET /produtos/1/edit
   def edit
   end
 
-  # POST /produtos or /produtos.json
   def create
     @produto = Produto.new(produto_params)
 
@@ -34,7 +39,6 @@ class ProdutosController < ApplicationController
     end
   end
 
-  # PATCH/PUT /produtos/1 or /produtos/1.json
   def update
     respond_to do |format|
       if @produto.update(produto_params)
@@ -47,7 +51,6 @@ class ProdutosController < ApplicationController
     end
   end
 
-  # DELETE /produtos/1 or /produtos/1.json
   def destroy
     @produto.destroy!
 
@@ -58,12 +61,10 @@ class ProdutosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_produto
       @produto = Produto.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
     def produto_params
       params.require(:produto).permit(:nome, :descricao, :preco, :foto_url, :imagem, :categoria_id)
     end

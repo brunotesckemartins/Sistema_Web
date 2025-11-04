@@ -1,0 +1,108 @@
+.produto-detalhe-container {
+  padding: 40px;
+  background: #f9f9f9;
+  min-height: 100vh;
+}
+
+.produto-nome {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.produto-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.produto-imagem {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 8px;
+  background: #ddd;
+}
+
+.produto-info {
+  margin-top: 10px;
+}
+
+.produto-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.produto-categoria {
+  display: inline-block;
+  border: 1px solid #555;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.produto-descricao {
+  color: #666;
+  margin: 10px 0 20px;
+}
+
+.produto-preco {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.produto-preco span {
+  color: #e83e8c;
+}
+
+.btn-carrinho {
+  padding: 12px 20px;
+  background: #e83e8c;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.btn-carrinho:hover {
+  background: #d63384;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+
+  h1, h2, h3 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  table {
+    width: 100%;
+    font-size: 0.9rem;
+    display: block;
+    overflow-x: auto;
+  }
+}

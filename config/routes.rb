@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   resources :eventos
-  devise_for :usuarios
+  devise_for :usuarios, path: "auth"
 
   root "pages#home"
   resources :usuarios
   resources :produtos
 
   post "add_to_carrinho/:produto_id", to: "carrinho#add_to_carrinho", as: "add_to_carrinho"
+
+  post "decrease_quantity/:produto_id", to: "carrinho#decrease_quantity", as: "decrease_quantity"
 
   delete "remove_from_carrinho/:produto_id", to: "carrinho#remove_from_cart", as: "remove_from_carrinho"
 
