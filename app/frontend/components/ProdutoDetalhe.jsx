@@ -1,19 +1,36 @@
 import React from "react";
 import "./ProdutoDetalhe.css";
+function getCsrfToken() {
+    return document.querySelector("meta[name='csrf-token']")?.content;
+}
 
 export default function ProdutoDetalhe(props) {
-
     const { produto } = props;
 
+    const adicionarAoCarrinho = async () => {
+        const productId = produto.id;
 
-    const adicionarAoCarrinho = () => {
-        alert(`${produto.nome} foi adicionado ao carrinho!`);
+        try {
+            const response = await fetch(`/add_to_carrinho/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-CSRF-Token': getCsrfToken()
+                }
+            });
+
+            const data = await response.json();
+
+            alert(data.notice || "Produto adicionado ao carrinho!");
+
+        } catch (error) {
+            console.error("Erro ao adicionar ao carrinho:", error);
+            alert("Não foi possível adicionar o produto.");
+        }
     };
 
     return (
         <>
-            {}
-
             <div className="produto-detalhe-container">
                 <h1 className="produto-nome">{produto.nome}</h1>
 

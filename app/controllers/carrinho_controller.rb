@@ -9,14 +9,28 @@ class CarrinhoController < ApplicationController
     total_preco = 0
     itens_completos = produtos.map do |produto|
       quantidade = @carrinho_hash[produto.id.to_s].to_i
-
       total_item = produto.preco * quantidade
       total_preco += total_item
-
       produto.attributes.merge(
         quantidade: quantidade,
         total_item: total_item
       )
+    end
+
+    cart_data = {
+      itens: itens_completos,
+      total_geral: total_preco
+    }
+
+    respond_to do |format|
+
+      format.html {
+        @react_props = { initialCart: cart_data }
+      }
+
+      format.json {
+        render json: cart_data
+      }
     end
 
     @react_props = {

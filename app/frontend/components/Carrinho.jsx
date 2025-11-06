@@ -1,5 +1,4 @@
-import { useState } from "react";
-import Navbar from "../components/Navbar";
+import React, { useState } from "react";
 import "./Carrinho.css";
 
 function getCsrfToken() {
@@ -14,7 +13,7 @@ export default function Carrinho({ initialCart }) {
     const loadCart = async () => {
         const response = await fetch('/carrinho', {
             headers: {
-                'Accept': 'application/json' // Pede JSON
+                'Accept': 'application/json'
             }
         });
         const data = await response.json();
@@ -33,10 +32,7 @@ export default function Carrinho({ initialCart }) {
 
         await fetch(url, {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'X-CSRF-Token': getCsrfToken()
-            }
+            headers: { 'X-CSRF-Token': getCsrfToken() }
         });
 
         loadCart();
@@ -45,10 +41,7 @@ export default function Carrinho({ initialCart }) {
     const removerItem = async (id) => {
         await fetch(`/remove_from_carrinho/${id}`, {
             method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'X-CSRF-Token': getCsrfToken()
-            }
+            headers: { 'X-CSRF-Token': getCsrfToken() }
         });
 
         loadCart();
@@ -56,7 +49,6 @@ export default function Carrinho({ initialCart }) {
 
     return (
         <>
-            <Navbar />
             <div className="carrinho-container">
                 <h1 className="carrinho-title">Cestinha de doces</h1>
 
@@ -73,8 +65,8 @@ export default function Carrinho({ initialCart }) {
                             </div>
 
                             <p className="carrinho-preco">
-                                {/* O backend já manda o total do item, mas podemos calcular aqui também */}
-                                Total: R${(item.preco * item.quantidade).toFixed(2)}
+                                {}
+                                Total: R${Number(item.preco * item.quantidade).toFixed(2)}
                             </p>
 
                             <button
@@ -89,7 +81,8 @@ export default function Carrinho({ initialCart }) {
 
                 <div className="carrinho-footer">
                     <h2>
-                        Total da compra: <span>R${total.toFixed(2)}</span>
+                        {}
+                        Total da compra: <span>R${Number(total).toFixed(2)}</span>
                     </h2>
                     <button className="btn-finalizar">Finalizar pedido</button>
                 </div>

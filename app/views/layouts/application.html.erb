@@ -17,8 +17,10 @@
   <nav>
     <%= link_to 'Home', root_path %> |
     <%= link_to 'Ver Seu Carrinho', carrinho_path %> |
-    <%= link_to 'Ver Eventos', eventos_path %>
-    <%# Links de Devise: %>
+    <%= link_to 'Ver Eventos', eventos_path %> |
+    <%= link_to 'Produtos', produtos_path %>
+
+
     <% if usuario_signed_in? %>
       | <%= button_to "Sair", destroy_usuario_session_path, method: :delete %>
     <% else %>
