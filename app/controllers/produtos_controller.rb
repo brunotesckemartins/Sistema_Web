@@ -27,7 +27,6 @@ class ProdutosController < ApplicationController
 
   def create
     @produto = Produto.new(produto_params)
-
     respond_to do |format|
       if @produto.save
         format.html { redirect_to @produto, notice: "Produto was successfully created." }
@@ -53,7 +52,6 @@ class ProdutosController < ApplicationController
 
   def destroy
     @produto.destroy!
-
     respond_to do |format|
       format.html { redirect_to produtos_path, notice: "Produto was successfully destroyed.", status: :see_other }
       format.json { head :no_content }

@@ -21,13 +21,10 @@ class CarrinhoController < ApplicationController
       itens: itens_completos,
       total_geral: total_preco
     }
-
     respond_to do |format|
-
       format.html {
         @react_props = { initialCart: cart_data }
       }
-
       format.json {
         render json: cart_data
       }
@@ -44,7 +41,6 @@ class CarrinhoController < ApplicationController
     session[:carrinho] ||= {}
     produto_id = params[:produto_id].to_s
     session[:carrinho][produto_id] = (session[:carrinho][produto_id].to_i + 1)
-
     render json: { notice: "Produto adicionado!" }, status: :ok
   end
   def decrease_quantity
@@ -64,7 +60,6 @@ class CarrinhoController < ApplicationController
     session[:carrinho] ||= {}
     produto_id = params[:produto_id].to_s
     session[:carrinho].delete(produto_id)
-
     render json: { notice: "Produto removido." }, status: :ok
   end
 
