@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_04_182115) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_12_180453) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -79,6 +79,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_04_182115) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "item_pedidos", force: :cascade do |t|
+    t.bigint "pedido_id", null: false
+    t.bigint "produto_id", null: false
+    t.integer "quantidade"
+    t.decimal "preco_unitario"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pedido_id"], name: "index_item_pedidos_on_pedido_id"
+    t.index ["produto_id"], name: "index_item_pedidos_on_produto_id"
+  end
+
+  create_table "pedidos", force: :cascade do |t|
+    t.bigint "usuario_id", null: false
+    t.string "status"
+    t.decimal "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["usuario_id"], name: "index_pedidos_on_usuario_id"
+  end
+
   create_table "produtos", force: :cascade do |t|
     t.string "nome"
     t.decimal "preco"
@@ -111,6 +131,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_04_182115) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.boolean "admin", default: false
+    t.string "login"
+    t.string "telefone"
+    t.string "cep"
+    t.text "endereco"
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
@@ -118,6 +142,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_04_182115) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "enderecos", "usuarios"
+  add_foreign_key "item_pedidos", "pedidos"
+  add_foreign_key "item_pedidos", "produtos"
+  add_foreign_key "pedidos", "usuarios"
   add_foreign_key "produtos", "categorias"
   add_foreign_key "promocaos", "produtos"
 end

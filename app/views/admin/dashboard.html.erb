@@ -1,0 +1,34 @@
+<h1>Painel de Gestão</h1>
+<p>Bem-vinda, dona da doceria!</p>
+
+<hr>
+
+<h2>Métricas Principais</h2>
+
+<div style="display: flex; gap: 20px;">
+  <div style="border: 1px solid #ccc; padding: 10px;">
+    <h3>Faturamento Total</h3>
+    <h2>R$ <%= @faturamento_total %></h2>
+  </div>
+
+  <div style="border: 1px solid #ccc; padding: 10px;">
+    <h3>Total de Pedidos</h3>
+    <h2><%= @total_pedidos %></h2>
+  </div>
+</div>
+
+<hr>
+
+<h2>Produtos Mais Vendidos (por quantidade)</h2>
+
+<% if @produtos_mais_vendidos.empty? %>
+  <p>Ainda não há produtos vendidos.</p>
+<% else %>
+  <ol>
+    <% @produtos_mais_vendidos.each do |nome, quantidade| %>
+      <li>
+        <strong><%= nome %>:</strong> <%= quantidade %> unidades
+      </li>
+    <% end %>
+  </ol>
+<% end %>

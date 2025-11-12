@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   resources :eventos
-  devise_for :usuarios, path: "auth"
+  resources :pedidos, only: [ :create, :index, :show ]
+  devise_for :usuarios,
+             path: "auth",
+             controllers: {
+               registrations: "autenticacao/registrations",
+               sessions: "autenticacao/sessions"
+             }
 
   root "pages#home"
   resources :usuarios
@@ -13,6 +19,8 @@ Rails.application.routes.draw do
   delete "remove_from_carrinho/:produto_id", to: "carrinho#remove_from_cart", as: "remove_from_carrinho"
 
   get "carrinho", to: "carrinho#show", as: "carrinho"
+
+  get "admin/dashboard", to: "admin#dashboard"
 
   namespace :api do
     namespace :v1 do

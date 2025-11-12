@@ -3,4 +3,5 @@ class Usuario < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :enderecos
+  has_many :pedidos
 end

@@ -1,0 +1,118 @@
+.login-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f4f4;
+  padding: 50px;
+  height: 100vh;
+}
+
+.login-box {
+  width: 50%;
+  padding: 40px;
+}
+
+.login-box h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.login-box p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-box input {
+  padding: 12px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+}
+
+.login-box button {
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background-color: #e91e63;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-box button:hover {
+  background-color: #d81b60;
+}
+
+/* --- Lado direito --- */
+.register-box {
+  width: 40%;
+  padding: 40px;
+}
+
+.register-box h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.register-box p {
+  color: #555;
+  font-size: 16px;
+}
+
+.register-box a {
+  color: #e91e63;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-box a:hover {
+  text-decoration: underline;
+}
+
+
+/* ========= Estilos Responsivos Globais ========= */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+
+  h1, h2, h3 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  table {
+    width: 100%;
+    font-size: 0.9rem;
+    display: block;
+    overflow-x: auto;
+  }
+}

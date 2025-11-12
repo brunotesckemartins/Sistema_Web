@@ -47,6 +47,25 @@ export default function Carrinho({ initialCart }) {
         loadCart();
     };
 
+    const finalizarPedido = async () => {
+        const response = await fetch('/pedidos', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'X-CSRF-Token': getCsrfToken()
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(data.notice);
+            loadCart();
+        } else {
+            alert(data.error || "Erro ao finalizar pedido");
+        }
+    };
+
     return (
         <>
             <div className="carrinho-container">
@@ -84,7 +103,7 @@ export default function Carrinho({ initialCart }) {
                         {}
                         Total da compra: <span>R${Number(total).toFixed(2)}</span>
                     </h2>
-                    <button className="btn-finalizar">Finalizar pedido</button>
+                    <button className="btn-finalizar" onClick={finalizarPedido}>Finalizar pedido</button>
                 </div>
             </div>
         </>
