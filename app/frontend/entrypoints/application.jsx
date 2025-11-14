@@ -6,6 +6,23 @@ import ProdutoDetalhe from '../components/ProdutoDetalhe';
 import Carrinho from '../components/Carrinho';
 import Login from '../components/Login';
 import Cadastro from '../components/Cadastro';
+import AdminProdutosIndex from '../components/AdminProdutosIndex';
+import AdminProdutoForm from '../components/AdminProdutoForm';
+import AdminEventosIndex from '../components/AdminEventosIndex';
+import AdminEventoForm from '../components/AdminEventoForm';
+import AdminUsuariosIndex from '../components/AdminUsuariosIndex';
+import AdminUsuarioForm from '../components/AdminUsuarioForm';
+import AdminPedidosIndex from '../components/AdminPedidosIndex';
+import AdminPedidoForm from '../components/AdminPedidoForm';
+
+import '../stylesheets/Navbar.css';
+import '../stylesheets/AdminIndex.css';
+import '../stylesheets/AdminProdutoForm.css';
+import '../stylesheets/Cadastro.css';
+import '../stylesheets/Carrinho.css';
+import '../stylesheets/Home.css';
+import '../stylesheets/Login.css';
+import '../stylesheets/ProdutoDetalhe.css';
 
 const csrfToken = document.querySelector("meta[name='csrf-token']")?.content;
 const originalFetch = fetch;
@@ -51,5 +68,78 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cadastroRootEl) {
         const root = createRoot(cadastroRootEl);
         root.render(<Cadastro />);
+    }
+
+    const hamburger = document.getElementById('hamburger-button');
+    const navMenu = document.getElementById('nav-links-menu');
+
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navMenu.classList.toggle('open');
+        });
+
+        navMenu.querySelectorAll('a, button').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                navMenu.classList.remove('open');
+            });
+        });
+    }
+
+    const adminProdutosIndexEl = document.getElementById('react-admin-produtos-index-root');
+    if (adminProdutosIndexEl) {
+        const allProps = JSON.parse(adminProdutosIndexEl.dataset.props);
+        const root = createRoot(adminProdutosIndexEl);
+        root.render(<AdminProdutosIndex {...allProps} />);
+    }
+
+    const adminProdutoFormEl = document.getElementById('react-admin-produto-form-root');
+    if (adminProdutoFormEl) {
+        const allProps = JSON.parse(adminProdutoFormEl.dataset.props);
+        const root = createRoot(adminProdutoFormEl);
+        root.render(<AdminProdutoForm {...allProps} />);
+    }
+
+    const adminEventosIndexEl = document.getElementById('react-admin-eventos-index-root');
+    if (adminEventosIndexEl) {
+        const allProps = JSON.parse(adminEventosIndexEl.dataset.props);
+        const root = createRoot(adminEventosIndexEl);
+        root.render(<AdminEventosIndex {...allProps} />);
+    }
+
+    const adminEventoFormEl = document.getElementById('react-admin-evento-form-root');
+    if (adminEventoFormEl) {
+        const allProps = JSON.parse(adminEventoFormEl.dataset.props);
+        const root = createRoot(adminEventoFormEl);
+        root.render(<AdminEventoForm {...allProps} />);
+    }
+
+    const adminUsuariosIndexEl = document.getElementById('react-admin-usuarios-index-root');
+    if (adminUsuariosIndexEl) {
+        const allProps = JSON.parse(adminUsuariosIndexEl.dataset.props);
+        const root = createRoot(adminUsuariosIndexEl);
+        root.render(<AdminUsuariosIndex {...allProps} />);
+    }
+
+    const adminUsuarioFormEl = document.getElementById('react-admin-usuario-form-root');
+    if (adminUsuarioFormEl) {
+        const allProps = JSON.parse(adminUsuarioFormEl.dataset.props);
+        const root = createRoot(adminUsuarioFormEl);
+        root.render(<AdminUsuarioForm {...allProps} />);
+    }
+
+    const adminPedidosIndexEl = document.getElementById('react-admin-pedidos-index-root');
+    if (adminPedidosIndexEl) {
+        const allProps = JSON.parse(adminPedidosIndexEl.dataset.props);
+        const root = createRoot(adminPedidosIndexEl);
+        root.render(<AdminPedidosIndex {...allProps} />);
+    }
+
+    const adminPedidoFormEl = document.getElementById('react-admin-pedido-form-root');
+    if (adminPedidoFormEl) {
+        const allProps = JSON.parse(adminPedidoFormEl.dataset.props);
+        const root = createRoot(adminPedidoFormEl);
+        root.render(<AdminPedidoForm {...allProps} />);
     }
 });

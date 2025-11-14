@@ -3,7 +3,7 @@ class AdminController < ApplicationController
 
   def dashboard
     @total_pedidos = Pedido.count
-    @faturament_total = Pedido.sum(:total)
+    @faturamento_total = Pedido.sum(:total)
     @ultimo_pedido = Pedido.order(created_at: :desc).first
     @produtos_mais_vendidos = ItemPedido.joins(:produto)
                                         .group("produtos.nome")

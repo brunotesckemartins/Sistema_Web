@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Carrinho.css";
+import "../stylesheets/Carrinho.css";
 
 function getCsrfToken() {
     return document.querySelector("meta[name='csrf-token']")?.content;

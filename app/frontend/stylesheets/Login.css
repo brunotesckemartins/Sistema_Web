@@ -52,7 +52,6 @@
   background-color: #d81b60;
 }
 
-/* --- Lado direito --- */
 .register-box {
   width: 40%;
   padding: 40px;
@@ -80,7 +79,6 @@
 }
 
 
-/* ========= Estilos Responsivos Globais ========= */
 .container {
   max-width: 1200px;
   margin: auto;

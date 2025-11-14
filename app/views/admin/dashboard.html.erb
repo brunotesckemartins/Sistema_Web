@@ -3,32 +3,15 @@
 
 <hr>
 
-<h2>Métricas Principais</h2>
+<div style="margin-bottom: 2rem;">
+  <%= link_to 'Gerenciar Produtos', admin_produtos_path, style: 'font-size: 1.1em; padding: 10px 15px; background: #e91e63; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;' %>
 
-<div style="display: flex; gap: 20px;">
-  <div style="border: 1px solid #ccc; padding: 10px;">
-    <h3>Faturamento Total</h3>
-    <h2>R$ <%= @faturamento_total %></h2>
-  </div>
+  <%= link_to 'Gerenciar Eventos', admin_eventos_path, style: 'font-size: 1.1em; padding: 10px 15px; background: #e91e63; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;' %>
 
-  <div style="border: 1px solid #ccc; padding: 10px;">
-    <h3>Total de Pedidos</h3>
-    <h2><%= @total_pedidos %></h2>
-  </div>
+  <%= link_to 'Gerenciar Usuários', admin_usuarios_path, style: 'font-size: 1.1em; padding: 10px 15px; background: #e91e63; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;' %>
+
+  <%= link_to 'Gerenciar Pedidos', admin_pedidos_path, style: 'font-size: 1.1em; padding: 10px 15px; background: #e91e63; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;' %>
 </div>
 
-<hr>
 
-<h2>Produtos Mais Vendidos (por quantidade)</h2>
-
-<% if @produtos_mais_vendidos.empty? %>
-  <p>Ainda não há produtos vendidos.</p>
-<% else %>
-  <ol>
-    <% @produtos_mais_vendidos.each do |nome, quantidade| %>
-      <li>
-        <strong><%= nome %>:</strong> <%= quantidade %> unidades
-      </li>
-    <% end %>
-  </ol>
-<% end %>
+<h2>Métricas Principais</h2>

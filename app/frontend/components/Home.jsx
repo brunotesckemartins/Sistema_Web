@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Home.css';
+import '../stylesheets/Home.css';
 export default function Home({ doces, eventos, promocoes }) {
 
     const [categoria, setCategoria] = useState("");

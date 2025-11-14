@@ -1,5 +1,5 @@
-import React, { useState } from "react"; // <-- ESTA É A LINHA CORRIGIDA
-import "./Cadastro.css";
+import React, { useState } from "react";
+import "../stylesheets/Cadastro.css";
 
 export default function Cadastro() {
     const [formData, setFormData] = useState({

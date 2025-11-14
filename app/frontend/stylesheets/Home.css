@@ -76,7 +76,6 @@ body {
     cursor: pointer;
 }
 
-/* SECTIONS */
 .section {
     padding: 40px;
 }
@@ -97,7 +96,6 @@ body {
     border-radius: 6px;
 }
 
-/* GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -150,7 +148,7 @@ body {
     cursor: pointer;
 }
 
-/* EVENTOS */
+
 .evento-card {
     background: #fff;
     border-radius: 10px;
@@ -173,7 +171,6 @@ body {
     margin-top: 5px;
 }
 
-/* CALL */
 .call {
     text-align: center;
     padding: 40px;
@@ -188,7 +185,6 @@ body {
     color: #666;
 }
 
-/* FOOTER */
 .footer {
     background: #ddd;
     padding: 20px 40px;

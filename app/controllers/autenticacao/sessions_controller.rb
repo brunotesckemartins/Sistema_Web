@@ -3,11 +3,9 @@ class Autenticacao::SessionsController < Devise::SessionsController
   respond_to :json, only: [ :create, :destroy ]
 
   def create
-    # Tenta autenticar o usuário
     self.resource = warden.authenticate(auth_options)
 
     if resource
-      # Sucesso
       sign_in(resource_name, resource)
       render json: {
         message: "Login com sucesso.",
@@ -16,7 +14,7 @@ class Autenticacao::SessionsController < Devise::SessionsController
     else
       render json: {
         message: "Email ou senha inválidos."
-      }, status: :unauthorized # 401
+      }, status: :unauthorized
     end
   end
 

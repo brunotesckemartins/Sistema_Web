@@ -13,22 +13,31 @@
 </head>
 
 <body>
-<header>
-  <nav>
-    <%= link_to 'Home', root_path %> |
-    <%= link_to 'Ver Seu Carrinho', carrinho_path %> |
-    <%= link_to 'Ver Eventos', eventos_path %> |
-    <%= link_to 'Produtos', produtos_path %>
 
+<nav class="navbar">
+  <div class="logo">
+    <span class="logo-black">Doces da</span>
+    <span class="logo-pink">Neide</span>
+  </div>
+
+  <div class="hamburger" id="hamburger-button" role="button" aria-label="Menu" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <ul class="nav-links" id="nav-links-menu">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Ver Eventos', eventos_path %></li>
+    <li><%= link_to 'Cestinha', carrinho_path %></li>
 
     <% if usuario_signed_in? %>
-      | <%= button_to "Sair", destroy_usuario_session_path, method: :delete %>
+      <li class="btn-encomendar"><%= button_to "Sair", destroy_usuario_session_path, method: :delete %></li>
     <% else %>
-      | <%= link_to 'Entrar', new_usuario_session_path %>
+      <li class="btn-encomendar"><%= link_to 'Entrar', new_usuario_session_path %></li>
     <% end %>
-  </nav>
-</header>
-
+  </ul>
+</nav>
 <%= yield %>
 
 </body>

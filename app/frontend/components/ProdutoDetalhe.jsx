@@ -1,5 +1,5 @@
 import React from "react";
-import "./ProdutoDetalhe.css";
+import "../stylesheets/ProdutoDetalhe.css";
 function getCsrfToken() {
     return document.querySelector("meta[name='csrf-token']")?.content;
 }

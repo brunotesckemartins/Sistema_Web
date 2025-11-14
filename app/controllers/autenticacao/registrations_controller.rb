@@ -1,10 +1,8 @@
 class Autenticacao::RegistrationsController < Devise::RegistrationsController
   respond_to :json
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def create
     build_resource(sign_up_params)
-
     resource.save
 
     if resource.persisted?
@@ -16,5 +14,19 @@ class Autenticacao::RegistrationsController < Devise::RegistrationsController
         errors: resource.errors.to_hash(true)
       }, status: :unprocessable_content
     end
+  end
+
+  private
+
+  def sign_up_params
+    params.require(:usuario).permit(
+      :email,
+      :password,
+      :password_confirmation,
+      :login,
+      :telefone,
+      :cep,
+      :endereco
+    )
   end
 end
