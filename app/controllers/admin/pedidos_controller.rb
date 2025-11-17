@@ -7,7 +7,7 @@ class Admin::PedidosController < ApplicationController
 
     pedidos_props = pedidos_com_usuario.map do |pedido|
       pedido.as_json.merge(
-        usuario: pedido.usuario.as_json(only: [ :id, :email, :login ])
+        usuario: pedido.usuario.as_json(only: [ :id, :email ])
       )
     end
 

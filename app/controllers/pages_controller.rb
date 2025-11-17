@@ -6,7 +6,8 @@ class PagesController < ApplicationController
         id: produto.id,
         nome: produto.nome,
         preco: produto.preco,
-        categoria: produto.categoria.nome
+        categoria: produto.categoria&.nome,
+        imagem_url: produto.imagem.attached? ? url_for(produto.imagem) : nil
       }
     end
 
@@ -20,13 +21,14 @@ class PagesController < ApplicationController
       }
     end
 
-    promocoes = Promocao.all
+    promocoes = Promocao.includes(:produto).all
     promocoes_props = promocoes.map do |promo|
       {
         id: promo.id,
-        nome: promo.nome,
+        nome: promo.nome_promocao,
         preco: promo.preco_promocional,
-        produto_id: promo.produto_id
+        produto_id: promo.produto_id,
+        imagem_url: promo.produto.imagem.attached? ? url_for(promo.produto.imagem) : nil
       }
     end
 

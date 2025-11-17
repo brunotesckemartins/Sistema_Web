@@ -3,7 +3,10 @@ import React, { useState } from 'react';
 export default function AdminProdutoForm(props) {
     const [formData, setFormData] = useState(props.produto);
     const [errors, setErrors] = useState(null);
+    const [novaImagem, setNovaImagem] = useState(null); // Para guardar o arquivo selecionado
+    const [preview, setPreview] = useState(props.produto.imagem_url); // Mostra a foto atual ou o preview
 
+    // Pega a lista de categorias enviada pelo controller
     const categorias = props.categorias || [];
 
     const handleChange = (e) => {
@@ -11,6 +14,14 @@ export default function AdminProdutoForm(props) {
             ...formData,
             [e.target.name]: e.target.value
         });
+    };
+
+    const handleFileChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            setNovaImagem(file);
+            setPreview(URL.createObjectURL(file)); // Cria um preview local instantâneo
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -21,27 +32,32 @@ export default function AdminProdutoForm(props) {
         const url = isNew ? '/admin/produtos' : `/admin/produtos/${formData.id}`;
         const method = isNew ? 'POST' : 'PATCH';
 
-        const params = {
-            produto: {
-                nome: formData.nome,
-                descricao: formData.descricao,
-                preco: formData.preco,
-                categoria_id: formData.categoria_id
-            }
-        };
+        // --- MUDANÇA CRUCIAL: Usar FormData para envio de arquivos ---
+        const data = new FormData();
+        data.append('produto[nome]', formData.nome || '');
+        data.append('produto[descricao]', formData.descricao || '');
+        data.append('produto[preco]', formData.preco || '');
+        data.append('produto[categoria_id]', formData.categoria_id || '');
+
+        if (novaImagem) {
+            data.append('produto[imagem]', novaImagem);
+        }
 
         try {
             const response = await fetch(url, {
                 method: method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(params)
+                // NÃO coloque 'Content-Type': 'application/json' aqui!
+                // O browser define automaticamente o boundary do multipart/form-data
+                body: data
             });
-            const data = await response.json();
+
+            const responseData = await response.json();
+
             if (response.ok) {
-                alert(data.message);
+                alert(responseData.message);
                 window.location.href = '/admin/produtos';
             } else {
-                setErrors(data.errors);
+                setErrors(responseData.errors);
             }
         } catch (err) {
             alert('Erro de conexão.');
@@ -67,44 +83,44 @@ export default function AdminProdutoForm(props) {
                 )}
 
                 <form onSubmit={handleSubmit} className="admin-form">
+
+                    {/* --- PREVIEW DA IMAGEM --- */}
+                    <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                        {preview ? (
+                            <img
+                                src={preview}
+                                alt="Preview"
+                                style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '10px', border: '1px solid #ccc' }}
+                            />
+                        ) : (
+                            <div style={{ width: '150px', height: '150px', background: '#eee', margin: '0 auto', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#888' }}>
+                                Sem Foto
+                            </div>
+                        )}
+                    </div>
+
+                    <div>
+                        <label htmlFor="imagem">Foto do Produto</label>
+                        <input
+                            type="file"
+                            id="imagem"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                            style={{ padding: '10px 0' }}
+                        />
+                    </div>
+
                     <div>
                         <label htmlFor="nome">Nome do Produto</label>
                         <input
                             type="text"
                             id="nome"
                             name="nome"
-                            placeholder="Nome do Produto"
                             value={formData.nome || ''}
                             onChange={handleChange}
                         />
                     </div>
 
-                    <div>
-                        <label htmlFor="descricao">Descrição</label>
-                        <textarea
-                            id="descricao"
-                            name="descricao"
-                            placeholder="Descrição"
-                            value={formData.descricao || ''}
-                            onChange={handleChange}
-                            rows="5"
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="preco">Preço (ex: 10.50)</label>
-                        <input
-                            type="number"
-                            id="preco"
-                            step="0.01"
-                            name="preco"
-                            placeholder="Preço (ex: 10.50)"
-                            value={formData.preco || ''}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {}
                     <div>
                         <label htmlFor="categoria_id">Categoria</label>
                         <select
@@ -112,17 +128,37 @@ export default function AdminProdutoForm(props) {
                             name="categoria_id"
                             value={formData.categoria_id || ''}
                             onChange={handleChange}
-                            style={{ width: '100%', padding: '12px', borderRadius: '20px', border: '1px solid #ccc', fontSize: '1rem', boxSizing: 'border-box' }}
+                            style={{ width: '100%', padding: '12px', borderRadius: '20px', border: '1px solid #ccc', fontSize: '1rem' }}
                         >
-                            <option value="">Selecione uma categoria...</option>
-                            {categorias.map((categoria) => (
-                                <option key={categoria.id} value={categoria.id}>
-                                    {categoria.nome}
-                                </option>
+                            <option value="">Selecione...</option>
+                            {categorias.map((cat) => (
+                                <option key={cat.id} value={cat.id}>{cat.nome}</option>
                             ))}
                         </select>
                     </div>
-                    {}
+
+                    <div>
+                        <label htmlFor="descricao">Descrição</label>
+                        <textarea
+                            id="descricao"
+                            name="descricao"
+                            value={formData.descricao || ''}
+                            onChange={handleChange}
+                            rows="5"
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="preco">Preço</label>
+                        <input
+                            type="number"
+                            id="preco"
+                            step="0.01"
+                            name="preco"
+                            value={formData.preco || ''}
+                            onChange={handleChange}
+                        />
+                    </div>
 
                     <button type="submit" className="btn-submit">
                         {formData.id ? 'Atualizar Produto' : 'Salvar Produto'}

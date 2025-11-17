@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
 export default function AdminPedidosIndex(props) {
-    const [pedidos, setPedidos] = useState(props.pedidos);
+    const [pedidos, setPedidos] = useState(props.pedidos || []);
 
     const formatarData = (dataISO) => {
+        if (!dataISO) return '-';
         return new Date(dataISO).toLocaleDateString('pt-BR', {
             day: '2-digit',
             month: '2-digit',
@@ -35,10 +36,8 @@ export default function AdminPedidosIndex(props) {
                     <tr key={pedido.id}>
                         <td>#{pedido.id}</td>
                         <td>{formatarData(pedido.created_at)}</td>
-
-                        {}
+                        {/* Proteção contra crash se usuario for null */}
                         <td>{pedido.usuario?.email || 'Usuário Deletado'}</td>
-
                         <td>R$ {Number(pedido.total).toFixed(2)}</td>
                         <td>{pedido.status}</td>
                         <td className="action-links">

@@ -2,7 +2,7 @@ class ProdutosController < ApplicationController
   before_action :set_produto, only: %i[ show ]
 
   def index
-    @produtos = Produto.all
+    redirect_to root_path
   end
 
   def show
@@ -12,7 +12,8 @@ class ProdutosController < ApplicationController
         nome: @produto.nome,
         descricao: @produto.descricao,
         preco: @produto.preco,
-        categoria: @produto.categoria&.nome
+        categoria: @produto.categoria&.nome,
+        imagem_url: @produto.imagem.attached? ? url_for(@produto.imagem) : nil
       }
     }
   end

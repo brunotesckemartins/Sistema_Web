@@ -11,9 +11,11 @@ class CarrinhoController < ApplicationController
       quantidade = @carrinho_hash[produto.id.to_s].to_i
       total_item = produto.preco * quantidade
       total_preco += total_item
+
       produto.attributes.merge(
         quantidade: quantidade,
-        total_item: total_item
+        total_item: total_item,
+        imagem_url: produto.imagem.attached? ? url_for(produto.imagem) : nil
       )
     end
 
@@ -21,6 +23,7 @@ class CarrinhoController < ApplicationController
       itens: itens_completos,
       total_geral: total_preco
     }
+
     respond_to do |format|
       format.html {
         @react_props = { initialCart: cart_data }
@@ -29,20 +32,15 @@ class CarrinhoController < ApplicationController
         render json: cart_data
       }
     end
-
-    @react_props = {
-      initialCart: {
-        itens: itens_completos,
-        total_geral: total_preco
-      }
-    }
   end
+
   def add_to_carrinho
     session[:carrinho] ||= {}
     produto_id = params[:produto_id].to_s
     session[:carrinho][produto_id] = (session[:carrinho][produto_id].to_i + 1)
     render json: { notice: "Produto adicionado!" }, status: :ok
   end
+
   def decrease_quantity
     session[:carrinho] ||= {}
     produto_id = params[:produto_id].to_s

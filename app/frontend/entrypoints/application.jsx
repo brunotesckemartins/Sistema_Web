@@ -14,6 +14,9 @@ import AdminUsuariosIndex from '../components/AdminUsuariosIndex';
 import AdminUsuarioForm from '../components/AdminUsuarioForm';
 import AdminPedidosIndex from '../components/AdminPedidosIndex';
 import AdminPedidoForm from '../components/AdminPedidoForm';
+import AdminPromocoesIndex from '../components/AdminPromocoesIndex';
+import AdminPromocaoForm from '../components/AdminPromocaoForm';
+import Perfil from '../components/Perfil';
 
 import '../stylesheets/Navbar.css';
 import '../stylesheets/AdminIndex.css';
@@ -23,6 +26,7 @@ import '../stylesheets/Carrinho.css';
 import '../stylesheets/Home.css';
 import '../stylesheets/Login.css';
 import '../stylesheets/ProdutoDetalhe.css';
+import '../stylesheets/Perfil.css';
 
 const csrfToken = document.querySelector("meta[name='csrf-token']")?.content;
 const originalFetch = fetch;
@@ -141,5 +145,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const allProps = JSON.parse(adminPedidoFormEl.dataset.props);
         const root = createRoot(adminPedidoFormEl);
         root.render(<AdminPedidoForm {...allProps} />);
+    }
+
+    const adminPromocoesIndexEl = document.getElementById('react-admin-promocoes-index-root');
+    if (adminPromocoesIndexEl) {
+        const allProps = JSON.parse(adminPromocoesIndexEl.dataset.props);
+        const root = createRoot(adminPromocoesIndexEl);
+        root.render(<AdminPromocoesIndex {...allProps} />);
+    }
+
+    const adminPromocaoFormEl = document.getElementById('react-admin-promocao-form-root');
+    if (adminPromocaoFormEl) {
+        const allProps = JSON.parse(adminPromocaoFormEl.dataset.props);
+        const root = createRoot(adminPromocaoFormEl);
+        root.render(<AdminPromocaoForm {...allProps} />);
+    }
+
+    const perfilRootEl = document.getElementById('react-perfil-root');
+    if (perfilRootEl) {
+        const root = createRoot(perfilRootEl);
+        root.render(<Perfil />);
     }
 });
