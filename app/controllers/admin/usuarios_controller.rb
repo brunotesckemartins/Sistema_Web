@@ -27,7 +27,6 @@ class Admin::UsuariosController < ApplicationController
     if @usuario.update(usuario_params)
       render json: { message: "Usuário atualizado!", usuario: @usuario }, status: :ok
     else
-      # Corrigido para :unprocessable_entity
       render json: { errors: @usuario.errors.to_hash(true) }, status: :unprocessable_entity
     end
   end
@@ -49,6 +48,11 @@ class Admin::UsuariosController < ApplicationController
   end
 
   def usuario_params
-    params.require(:usuario).permit(:email, :password, :password_confirmation, :login, :telefone, :cep, :endereco, :admin)
+    dados = params[:usuario] ? params.require(:usuario) : params
+
+    dados.permit(
+      :email, :password, :password_confirmation,
+      :login, :telefone, :cep, :endereco, :admin
+    )
   end
 end

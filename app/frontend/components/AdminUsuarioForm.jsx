@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function AdminUsuarioForm(props) {
-    const [formData, setFormData] = useState(props.usuario);
+    const [formData, setFormData] = useState(props.usuario || {});
     const [errors, setErrors] = useState(null);
 
     const handleChange = (e) => {
@@ -11,8 +11,6 @@ export default function AdminUsuarioForm(props) {
             [name]: type === 'checkbox' ? checked : value
         });
     };
-
-    /* */
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,13 +28,10 @@ export default function AdminUsuarioForm(props) {
                 telefone: formData.telefone,
                 cep: formData.cep,
                 endereco: formData.endereco,
+                password: formData.password,
+                password_confirmation: formData.password_confirmation
             }
         };
-
-        if (isNew || formData.password) {
-            params.usuario.password = formData.password;
-            params.usuario.password_confirmation = formData.password_confirmation;
-        }
 
         try {
             const response = await fetch(url, {
@@ -45,6 +40,7 @@ export default function AdminUsuarioForm(props) {
                 body: JSON.stringify(params)
             });
             const data = await response.json();
+
             if (response.ok) {
                 alert(data.message);
                 window.location.href = '/admin/usuarios';
