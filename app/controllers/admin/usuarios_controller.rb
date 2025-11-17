@@ -56,8 +56,7 @@ class Admin::UsuariosController < ApplicationController
     if params.key?(:usuario)
       params.require(:usuario).permit(*permitted_attrs)
     else
-      raise ActionController::ParameterMissing, :usuario
+      ActionController::Parameters.new(params).permit(*permitted_attrs)
     end
-    # -------------------------------------
   end
 end
