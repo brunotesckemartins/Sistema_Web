@@ -56,8 +56,7 @@ class Admin::UsuariosController < ApplicationController
     if params.key?(:usuario)
       params.require(:usuario).permit(*permitted_attrs)
     else
-      safe_hash = params.to_unsafe_h.slice(*permitted_attrs.map(&:to_s))
-      ActionController::Parameters.new(safe_hash).permit(*permitted_attrs)
+      ActionController::Parameters.new({}).permit(*permitted_attrs)
     end
   end
 end
