@@ -19,7 +19,7 @@ class Admin::UsuariosController < ApplicationController
     if @usuario.save
       render json: { message: "Usuário criado!", usuario: @usuario }, status: :created
     else
-      render json: { errors: @usuario.errors.to_hash(true) }, status: :unprocessable_content
+      render json: { errors: @usuario.errors.to_hash(true) }, status: :unprocessable_entity
     end
   end
 
@@ -27,7 +27,8 @@ class Admin::UsuariosController < ApplicationController
     if @usuario.update(usuario_params)
       render json: { message: "Usuário atualizado!", usuario: @usuario }, status: :ok
     else
-      render json: { errors: @usuario.errors.to_hash(true) }, status: :unprocessable_content
+      # Corrigido para :unprocessable_entity
+      render json: { errors: @usuario.errors.to_hash(true) }, status: :unprocessable_entity
     end
   end
 
@@ -35,11 +36,9 @@ class Admin::UsuariosController < ApplicationController
     if @usuario.destroy
       render json: { message: "Usuário excluído!" }, status: :ok
     else
-      # Se falhou (porque o usuário tem pedidos),
-      # envia a mensagem de erro do Rails para o React.
       render json: {
         message: @usuario.errors.full_messages.to_sentence
-      }, status: :unprocessable_content
+      }, status: :unprocessable_entity
     end
   end
 
