@@ -27,7 +27,8 @@ export default function AdminEventoForm(props) {
                 nome: formData.nome,
                 descricao: formData.descricao,
                 data_evento: formData.data_evento,
-                status: formData.status
+                status: formData.status,
+                localizacao: formData.localizacao
             }
         };
 
@@ -97,6 +98,17 @@ export default function AdminEventoForm(props) {
                             id="data_evento"
                             name="data_evento"
                             value={formData.data_evento || ''}
+                            onChange={handleChange}
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="localizacao">Localização</label>
+                        <input
+                            type="text"
+                            id="localizacao"
+                            name="localizacao"
+                            value={formData.localizacao || ''}
                             onChange={handleChange}
                         />
                     </div>

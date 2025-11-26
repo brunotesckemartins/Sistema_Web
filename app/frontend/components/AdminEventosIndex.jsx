@@ -36,6 +36,7 @@ export default function AdminEventosIndex(props) {
                 <tr>
                     <th>Nome</th>
                     <th>Data</th>
+                    <th>Localização</th>
                     <th>Status</th>
                     <th>Ações</th>
                 </tr>
@@ -45,6 +46,7 @@ export default function AdminEventosIndex(props) {
                     <tr key={evento.id}>
                         <td>{evento.nome}</td>
                         <td>{new Date(evento.data_evento).toLocaleDateString()}</td>
+                        <td>{evento.localizacao || '-'}</td>
                         <td>{evento.status}</td>
                         <td className="action-links">
                             <a href={`/admin/eventos/${evento.id}/edit`}>

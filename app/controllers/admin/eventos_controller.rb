@@ -43,6 +43,6 @@ class Admin::EventosController < ApplicationController
   end
 
   def evento_params
-    params.require(:evento).permit(:nome, :descricao, :data_evento, :status)
+    params.require(:evento).permit(:nome, :descricao, :data_evento, :status, :localizacao)
   end
 end

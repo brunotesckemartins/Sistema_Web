@@ -1,0 +1,178 @@
+<div class="container evento-detalhes">
+  <div class="evento-header">
+    <h1><%= @evento.nome %></h1>
+    <p class="evento-data"><%= l(@evento.data_evento, format: :long) if @evento.data_evento %></p>
+    <span class="evento-status"><%= @evento.status %></span>
+  </div>
+
+  <div class="evento-content">
+    <div class="evento-descricao">
+      <h2>Sobre o Evento</h2>
+      <p><%= @evento.descricao %></p>
+    </div>
+
+    <div class="evento-info">
+      <div class="info-card">
+        <h3>📍 Localização</h3>
+        <p>Em breve mais informações</p>
+      </div>
+      
+      <div class="info-card">
+        <h3>⏰ Horário</h3>
+        <p>A confirmar</p>
+      </div>
+
+  <div class="evento-actions">
+    <%= link_to "Voltar para Home", "/", class: "btn btn-gray" %>
+  </div>
+</div>
+
+<style>
+.evento-detalhes {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.evento-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 40px;
+  background: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2);
+}
+
+.evento-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.evento-data {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 15px;
+}
+
+.evento-status {
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.evento-content {
+  display: grid;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.evento-descricao {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border-left: 4px solid #e91e63;
+}
+
+.evento-descricao h2 {
+  color: #2d3748;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+}
+
+.evento-descricao p {
+  line-height: 1.6;
+  color: #4a5568;
+  font-size: 1.1rem;
+}
+
+.evento-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.info-card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border-left: 4px solid #e91e63;
+}
+
+.info-card h3 {
+  color: #2d3748;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.info-card p {
+  color: #4a5568;
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.evento-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 30px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-gray {
+  background: #f1f1f1;
+  color: #333;
+  border: 2px solid #f1f1f1;
+}
+
+.btn-gray:hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.btn-pink {
+  background: linear-gradient(45deg, #e91e63, #ad1457);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+}
+
+.btn-pink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+}
+
+@media (max-width: 768px) {
+  .evento-header h1 {
+    font-size: 2rem;
+  }
+  
+  .evento-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .evento-actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>

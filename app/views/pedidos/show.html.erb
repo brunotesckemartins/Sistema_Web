@@ -1,0 +1,43 @@
+<div class="card" style="padding: 40px; text-align: left;">
+  <h1 style="text-align: center; color: #e91e63; margin-bottom: 10px;">Finalizar Pagamento</h1>
+  <p style="text-align: center; color: #666;">Pedido #<%= @pedido.id %></p>
+
+  <hr style="margin: 30px 0; border-top: 1px solid #eee;">
+
+  <div style="margin-bottom: 20px;">
+    <h3 style="color: #333; margin-bottom: 15px;">Resumo do Pedido</h3>
+    <p><strong>Status:</strong> <%= @pedido.status %></p>
+    <p><strong>Total:</strong> R$ <%= number_to_currency(@pedido.total, unit: "", separator: ",", delimiter: "") %></p>
+    <p><strong>Data:</strong> <%= l(@pedido.created_at, format: :long) %></p>
+  </div>
+
+  <% if @pedido.item_pedidos.any? %>
+    <div style="margin-bottom: 20px;">
+      <h3 style="color: #333; margin-bottom: 15px;">Itens do Pedido</h3>
+      <% @pedido.item_pedidos.each do |item| %>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding: 10px; background: #f9f9f9; border-radius: 5px;">
+          <div>
+            <strong><%= item.produto.nome %></strong>
+            <br>
+            <small>Quantidade: <%= item.quantidade %></small>
+          </div>
+          <div>
+            R$ <%= number_to_currency(item.preco_unitario * item.quantidade, unit: "", separator: ",", delimiter: "") %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p style="color: #666; text-align: center;">Nenhum item encontrado neste pedido.</p>
+  <% end %>
+
+  <% if @pedido.status == "Aguardando Pagamento" || @pedido.status == "Recebido" %>
+    <div style="text-align: center; margin-top: 30px;">
+      <%= button_to "Confirmar Pagamento", confirmar_pagamento_pedido_path(@pedido), 
+                    method: :post, 
+                    class: "btn btn-success",
+                    style: "background: #4CAF50; color: white; border: none; padding: 12px 30px; font-size: 16px; border-radius: 5px; cursor: pointer;",
+                    data: { confirm: "Tem certeza que deseja confirmar o pagamento?" } %>
+    </div>
+  <% end %>
+</div>

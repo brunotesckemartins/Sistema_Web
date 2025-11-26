@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../stylesheets/Home.css';
 
 export default function Home({ doces, eventos, promocoes }) {
-
     const [categoria, setCategoria] = useState("");
 
     return (
@@ -12,19 +11,14 @@ export default function Home({ doces, eventos, promocoes }) {
                 <div className="banner-buttons">
                     <a href="#doces" className="btn-pink">Ver cardápio</a>
                     <a href="#eventos" className="btn-gray">Próximos Eventos</a>
+                    <a href="#promocoes" className="btn-gray">Promoções</a>
+
                 </div>
             </section>
 
             <section id="doces" className="section">
                 <h2>Doces</h2>
-                <div className="filters">
-                    <input type="text" placeholder="Pesquisar..." />
-                    <select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
-                        <option value="">Selecionar categoria...</option>
-                        <option value="Docinho">Docinhos</option>
-                        <option value="Bolos">Bolos</option>
-                    </select>
-                </div>
+                
 
                 <div className="grid">
                     {doces.map((doce) => (
@@ -43,7 +37,6 @@ export default function Home({ doces, eventos, promocoes }) {
                             <a href={`/produtos/${doce.id}`} className="btn-pink">
                                 Ver produto
                             </a>
-                            <span className="favorite">♡</span>
                         </div>
                     ))}
                 </div>
@@ -55,7 +48,6 @@ export default function Home({ doces, eventos, promocoes }) {
                 <div className="grid">
                     {promocoes.map((item) => (
                         <div key={item.id} className="card">
-                            {}
                             <div className="image">
                                 {item.imagem_url ? (
                                     <img src={item.imagem_url} alt={item.nome} />
@@ -63,7 +55,6 @@ export default function Home({ doces, eventos, promocoes }) {
                                     <span style={{ color: '#999', fontSize: '0.9rem' }}>Sem foto</span>
                                 )}
                             </div>
-                            {}
 
                             <p className="nome">{item.nome}</p>
                             <p className="preco">R$ {Number(item.preco).toFixed(2)}</p>
@@ -81,11 +72,14 @@ export default function Home({ doces, eventos, promocoes }) {
                 <p>Encontre o evento mais próximo de você para experimentar nossos doces!</p>
                 <div className="grid grid-2">
                     {eventos.map((evento) => (
-                        <div key={evento.id} className="evento-card">
-                            <p className="data">{evento.data}</p>
-                            <h3>{evento.nome}</h3>
-                            <p className="desc">{evento.desc}</p>
-                        </div>
+                        <a key={evento.id} href={`/eventos/${evento.id}`} className="evento-card-link">
+                            <div className="evento-card">
+                                <p className="data">{new Date(evento.data_evento).toLocaleDateString('pt-BR')}</p>
+                                <h3>{evento.nome}</h3>
+                                <p className="desc">{evento.descricao}</p>
+                                <span className="ver-detalhes">Ver detalhes →</span>
+                            </div>
+                        </a>
                     ))}
                 </div>
             </section>

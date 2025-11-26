@@ -23,12 +23,28 @@ export default function ProdutoDetalhe(props) {
         }
     };
 
+    const comprarAgora = async () => {
+        const productId = produto.id;
+        
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = `/produtos/${productId}/comprar_agora`;
+        
+        const csrfToken = document.createElement('input');
+        csrfToken.type = 'hidden';
+        csrfToken.name = 'authenticity_token';
+        csrfToken.value = getCsrfToken();
+        form.appendChild(csrfToken);
+        
+        document.body.appendChild(form);
+        form.submit();
+    };
+
     return (
         <>
             <div className="produto-detalhe-container">
                 <h1 className="produto-nome">{produto.nome}</h1>
                 <div className="produto-conteudo">
-                    {/* --- IMAGEM AQUI --- */}
                     {produto.imagem_url ? (
                         <img
                             src={produto.imagem_url}
@@ -47,11 +63,24 @@ export default function ProdutoDetalhe(props) {
                         <span className="produto-categoria">{produto.categoria}</span>
                         <p className="produto-descricao">{produto.descricao}</p>
                         <p className="produto-preco">
-                            Valor: <span>R${Number(produto.preco).toFixed(2)}</span>
+                            {produto.em_promocao ? (
+                                <>
+                                    <span className="preco-original">De: R${Number(produto.preco).toFixed(2)}</span>
+                                    <span className="preco-promocional">Por: R${Number(produto.preco_promocional).toFixed(2)}</span>
+                                </>
+                            ) : (
+                                <span>Valor: R${Number(produto.preco).toFixed(2)}</span>
+                            )}
                         </p>
-                        <button className="btn-carrinho" onClick={adicionarAoCarrinho}>
-                            Adicionar ao carrinho
-                        </button>
+                        
+                        <div className="produto-botoes">
+                            <button className="btn-comprar-agora" onClick={comprarAgora}>
+                                Comprar Agora
+                            </button>
+                            <button className="btn-carrinho" onClick={adicionarAoCarrinho}>
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

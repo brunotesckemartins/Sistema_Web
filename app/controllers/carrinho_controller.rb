@@ -61,6 +61,14 @@ class CarrinhoController < ApplicationController
     render json: { notice: "Produto removido." }, status: :ok
   end
 
+  def comprar_agora
+  produto = Produto.find(params[:produto_id])
+
+  session[:carrinho] = { produto.id.to_s => "1" }
+
+  redirect_to carrinho_path
+end
+
   private
 
   def json_request?

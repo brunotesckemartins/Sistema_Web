@@ -17,6 +17,7 @@ import AdminPedidoForm from '../components/AdminPedidoForm';
 import AdminPromocoesIndex from '../components/AdminPromocoesIndex';
 import AdminPromocaoForm from '../components/AdminPromocaoForm';
 import Perfil from '../components/Perfil';
+import '../stylesheets/Pagamento.css';
 
 import '../stylesheets/Navbar.css';
 import '../stylesheets/AdminIndex.css';

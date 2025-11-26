@@ -58,8 +58,6 @@ class Admin::PromocoesController < ApplicationController
   end
 
   def promocao_params
-    # --- CORREÇÃO AQUI ---
-    # Mudamos de :nome para :nome_promocao
     params.require(:promocao).permit(:nome_promocao, :preco_promocional, :produto_id)
   end
 end
