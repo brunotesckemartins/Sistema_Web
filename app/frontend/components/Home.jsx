@@ -61,7 +61,6 @@ export default function Home({ doces, eventos, promocoes }) {
                             <a href={`/produtos/${item.produto_id}`} className="btn-pink">
                                 Ver produto
                             </a>
-                            <span className="favorite">♡</span>
                         </div>
                     ))}
                 </div>
@@ -74,7 +73,6 @@ export default function Home({ doces, eventos, promocoes }) {
                     {eventos.map((evento) => (
                         <a key={evento.id} href={`/eventos/${evento.id}`} className="evento-card-link">
                             <div className="evento-card">
-                                <p className="data">{new Date(evento.data_evento).toLocaleDateString('pt-BR')}</p>
                                 <h3>{evento.nome}</h3>
                                 <p className="desc">{evento.descricao}</p>
                                 <span className="ver-detalhes">Ver detalhes →</span>

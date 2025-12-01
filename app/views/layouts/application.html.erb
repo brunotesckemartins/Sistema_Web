@@ -17,7 +17,7 @@
 <nav class="navbar">
   <div class="logo">
     <span class="logo-black">Doces da</span>
-    <span class="logo-pink">Neidi</span>
+    <span class="logo-pink">Neid</span>
   </div>
 
   <div class="hamburger" id="hamburger-button" role="button" aria-label="Menu" tabindex="0">
@@ -29,6 +29,10 @@
   <ul class="nav-links" id="nav-links-menu">
     <li><%= link_to 'Home', root_path %></li>
     <li><%= link_to 'Cestinha', carrinho_path %></li>
+
+    <% if current_usuario && current_usuario.admin? %>
+      <li><%= link_to "Dashboard Admin", admin_dashboard_path %></li>
+    <% end %>
 
     <% if usuario_signed_in? %>
       <li><%= link_to 'Meu Perfil', perfil_path, style: "font-weight: bold; color: #e91e63;" %></li>

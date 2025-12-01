@@ -35,7 +35,12 @@ class PagesController < ApplicationController
     @react_props = {
       doces: produtos_props,
       eventos: eventos_props,
-      promocoes: promocoes_props
+      promocoes: promocoes_props,
+      current_user: current_usuario ? {
+        id: current_usuario.id,
+        email: current_usuario.email,
+        admin: current_usuario.admin?
+      } : nil
     }
   end
 end
